@@ -327,12 +327,12 @@
       <Template dnOrder="2">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/mruby</Path>
-        <Checksum dnOrder="2">CB46AB0353AD90BCC535E887CA40E0D9</Checksum>
+        <Checksum dnOrder="2">5B82D28990C5AC6C3BB1EDA719056CA7</Checksum>
       </Template>
       <Template dnOrder="3">
         <Name dnOrder="0">sys_ports_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/mruby/framework/system/ports/src</Path>
-        <Checksum dnOrder="2">C7C5F12B6B72AE16A19616879948123F</Checksum>
+        <Checksum dnOrder="2">E2561D1C24238DE26AA46252CC4BFE99</Checksum>
       </Template>
       <Template dnOrder="4">
         <Name dnOrder="0">sys_devcon.c</Name>

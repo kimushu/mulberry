@@ -267,6 +267,7 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
+            <linkerLibFileItem>../../mruby/build/xc32/lib/libmruby.a</linkerLibFileItem>
             <linkerLibFileItem>../../../../../bin/framework/peripheral/PIC32MZ2048EFM064_peripherals.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
@@ -411,7 +412,7 @@
         <property key="use-indirect-calls" value="false"/>
       </C32CPP>
       <C32Global>
-        <property key="common-include-directories" value=""/>
+        <property key="common-include-directories" value="..\..\mruby\include"/>
         <property key="gp-relative-option" value=""/>
         <property key="legacy-libc" value="false"/>
         <property key="mdtcm" value=""/>
