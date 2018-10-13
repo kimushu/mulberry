@@ -121,7 +121,7 @@ extern "C" {
 #define SYS_PORT_E_TRIS         0xFFFF
 #define SYS_PORT_E_LAT          0x0000
 #define SYS_PORT_E_ODC          0x0000
-#define SYS_PORT_E_CNPU         0x0000
+#define SYS_PORT_E_CNPU         0x0002
 #define SYS_PORT_E_CNPD         0x0000
 #define SYS_PORT_E_CNEN         0x0000
 
@@ -148,7 +148,7 @@ extern "C" {
 #define SYS_CONSOLE_DEVICE_MAX_INSTANCES        2
 #define SYS_CONSOLE_INSTANCES_NUMBER            1
 #define SYS_CONSOLE_USB_CDC_INSTANCE       USB_DEVICE_CDC_INDEX_0
-#define SYS_CONSOLE_USB_CDC_COMM_BAUD_RATE 115200
+#define SYS_CONSOLE_USB_CDC_COMM_BAUD_RATE 921600
 #define SYS_CONSOLE_USB_CDC_RD_QUEUE_DEPTH 1
 #define SYS_CONSOLE_USB_CDC_WR_QUEUE_DEPTH 128
 #define SYS_CONSOLE_USB_CDC_READ_BUFFER_SIZE   512
@@ -215,7 +215,7 @@ extern "C" {
 
 
 /* Number of Endpoints used */
-#define DRV_USBHS_ENDPOINTS_NUMBER    1
+#define DRV_USBHS_ENDPOINTS_NUMBER    3
 
 
 

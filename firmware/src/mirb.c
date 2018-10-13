@@ -54,6 +54,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "mirb.h"
+#include "pybrepl.h"
+#include <mruby.h>
+#include <stdio.h>
 
 // *****************************************************************************
 // *****************************************************************************
@@ -93,9 +96,18 @@ MIRB_DATA mirbData;
 // *****************************************************************************
 // *****************************************************************************
 
+extern int mirb_main(FILE *fp, int verbose, int mrb_argc, char **argv);
 
-/* TODO:  Add any necessary local functions.
-*/
+
+static void *MIRB_Thread(MIRB_DATA *data)
+{
+    SYS_CONSOLE_Override();
+
+    for (;;) {
+        pybreplInit("\r\nmruby " MRUBY_VERSION " - " MRUBY_RELEASE_DATE "\r\nType \"help\" for more information.\r\n");
+        mirb_main(NULL, 0, 0, NULL);
+    }
+}
 
 
 // *****************************************************************************
@@ -116,11 +128,6 @@ void MIRB_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
     mirbData.state = MIRB_STATE_INIT;
-
-    
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
 }
 
 
@@ -142,8 +149,16 @@ void MIRB_Tasks ( void )
         case MIRB_STATE_INIT:
         {
             bool appInitialized = true;
-       
-        
+            pthread_attr_t attr;
+
+            pthread_attr_init(&attr);
+            pthread_attr_setstacksize(&attr, 16 * 1024);
+
+            if (pthread_create(&mirbData.thread, &attr, (void *(*)(void *))MIRB_Thread, &mirbData) != 0)
+            {
+                appInitialized = false;
+            }
+
             if (appInitialized)
             {
             
@@ -170,7 +185,6 @@ void MIRB_Tasks ( void )
     }
 }
 
- 
 
 /*******************************************************************************
  End of File

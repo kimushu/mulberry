@@ -327,7 +327,7 @@
       <Template dnOrder="2">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/mruby</Path>
-        <Checksum dnOrder="2">5B82D28990C5AC6C3BB1EDA719056CA7</Checksum>
+        <Checksum dnOrder="2">20E9EB173DF33BE1A42FC8EC1E25E0EE</Checksum>
       </Template>
       <Template dnOrder="3">
         <Name dnOrder="0">sys_ports_static.c</Name>
@@ -347,7 +347,7 @@
       <Template dnOrder="6">
         <Name dnOrder="0">tth_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/mruby</Path>
-        <Checksum dnOrder="2">C9DF37FA9CFF3823B831F67BA4AE8DDA</Checksum>
+        <Checksum dnOrder="2">9126DE62DA4110F74EA25B744BB4B294</Checksum>
       </Template>
       <Template dnOrder="7">
         <Name dnOrder="0">system_exceptions.c</Name>

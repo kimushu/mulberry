@@ -25,8 +25,8 @@
  * | Shadow registers           | Used for context switch                    |
  * | FPU in threads             | Enabled (Delayed switch)                   |
  * | FPU in ISRs                | Disabled                                   |
- * | DSP in threads             | Enabled (Delayed switch)                   |
- * | DSP in ISRs                | Disabled                                   |
+ * | DSP in threads             | Enabled (Instant switch)                   |
+ * | DSP in ISRs                | Enabled (Instant switch)                   |
  * +----------------------------+--------------------------------------------+
  */
 
@@ -44,7 +44,7 @@
  * | Thread | Accumulators            | ISTACK[0].ACC                        |
  * | Thread | Temporary FPU registers | TCTX.FPUt           (Delayed switch) |
  * | Thread | Preserved FPU registers | TCTX.FPUp           (Delayed switch) |
- * | Thread | DSP registers           | TCTX.DSP            (Delayed switch) |
+ * | Thread | DSP registers           | ISTACK[0].DSP                        |
  * | Thread | _impure_ptr             | TCTX.reent                           |
  * +--------+-------------------------+--------------------------------------+
  * | ISR[n] | Temporary GPRs          | ISTACK[n+1].GPRt                     |
@@ -53,7 +53,7 @@
  * | ISR[n] | SRSctl                  | ISTACK[n+1].CP0                      |
  * | ISR[n] | Accumulators            | ISTACK[n+1].ACC                      |
  * | ISR[n] | All FPU registers       | N/A                (Disabled in ISR) |
- * | ISR[n] | DSP registers           | N/A                (Disabled in ISR) |
+ * | ISR[n] | DSP registers           | ISTACK[n+1].DSP                      |
  * +--------+-------------------------+--------------------------------------+
  *  (n = interrupt level (0..N))
  */
@@ -101,9 +101,9 @@
 #define TTHREAD_FPU_INSTANT_SWITCH      0
 #define TTHREAD_FPU_DISALLOW_IN_ISR     1
 #define TTHREAD_FPU_DELAYED_IN_ISR      (TTHREAD_FPU_DELAYED_SWITCH && !TTHREAD_FPU_DISALLOW_IN_ISR)
-#define TTHREAD_DSP_DELAYED_SWITCH      1
-#define TTHREAD_DSP_INSTANT_SWITCH      0
-#define TTHREAD_DSP_DISALLOW_IN_ISR     1
+#define TTHREAD_DSP_DELAYED_SWITCH      0
+#define TTHREAD_DSP_INSTANT_SWITCH      1
+#define TTHREAD_DSP_DISALLOW_IN_ISR     0
 #define TTHREAD_DSP_DELAYED_IN_ISR      (TTHREAD_DSP_DELAYED_SWITCH && !TTHREAD_DSP_DISALLOW_IN_ISR)
 
 #ifndef __LANGUAGE_ASSEMBLY__
@@ -123,7 +123,12 @@ typedef struct {
   struct {
     uint32_t Lo, Hi;
   } ACC;
-  uint32_t __padding_92;
+  struct {
+    uint32_t Lo1, Hi1;
+    uint32_t Lo2, Hi2;
+    uint32_t Lo3, Hi3;
+    uint32_t DSPControl;
+  } DSP;
 } __attribute__(( aligned(8) )) tth_arch_isr_stack;
 #endif  /* !defined(__LANGUAGE_ASSEMBLY__) */
 
@@ -150,7 +155,14 @@ typedef struct {
 #define TTHREAD_ISTACK_OFF_GPR_RA       80
 #define TTHREAD_ISTACK_OFF_ACC_LO       84
 #define TTHREAD_ISTACK_OFF_ACC_HI       88
-#define TTHREAD_ISTACK_SIZE             96
+#define TTHREAD_ISTACK_OFF_DSP_LO1      92
+#define TTHREAD_ISTACK_OFF_DSP_HI1      96
+#define TTHREAD_ISTACK_OFF_DSP_LO2      100
+#define TTHREAD_ISTACK_OFF_DSP_HI2      104
+#define TTHREAD_ISTACK_OFF_DSP_LO3      108
+#define TTHREAD_ISTACK_OFF_DSP_HI3      112
+#define TTHREAD_ISTACK_OFF_DSP_CTRL     116
+#define TTHREAD_ISTACK_SIZE             120
 
 #ifndef __LANGUAGE_ASSEMBLY__
 typedef struct {
@@ -208,12 +220,6 @@ typedef struct {
     uint32_t f30lo, f30hi;
     uint32_t f31lo, f31hi;
   } FPUp;
-  struct {
-    uint32_t Lo1, Hi1;
-    uint32_t Lo2, Hi2;
-    uint32_t Lo3, Hi3;
-    uint32_t DSPControl;
-  } DSP;
   void *reent;
   uint32_t srs;
 } __attribute__(( aligned(8) )) tth_arch_context;
@@ -253,15 +259,8 @@ typedef struct {
 #define TTHREAD_TCTX_OFF_FPU_F29        240
 #define TTHREAD_TCTX_OFF_FPU_F30        248
 #define TTHREAD_TCTX_OFF_FPU_F31        256
-#define TTHREAD_TCTX_OFF_DSP_LO1        264
-#define TTHREAD_TCTX_OFF_DSP_HI1        268
-#define TTHREAD_TCTX_OFF_DSP_LO2        272
-#define TTHREAD_TCTX_OFF_DSP_HI2        276
-#define TTHREAD_TCTX_OFF_DSP_LO3        280
-#define TTHREAD_TCTX_OFF_DSP_HI3        284
-#define TTHREAD_TCTX_OFF_DSP_CTRL       288
-#define TTHREAD_TCTX_OFF_REENT          292
-#define TTHREAD_TCTX_OFF_SRS            296
-#define TTHREAD_TCTX_SIZE               300
+#define TTHREAD_TCTX_OFF_REENT          264
+#define TTHREAD_TCTX_OFF_SRS            268
+#define TTHREAD_TCTX_SIZE               272
 
 #endif  /* __TTH_CONFIG_H__ */

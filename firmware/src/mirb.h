@@ -56,6 +56,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include "system_config.h"
 #include "system_definitions.h"
 
@@ -114,6 +115,7 @@ typedef struct
     MIRB_STATES state;
 
     /* TODO: Define any additional data used by the application. */
+    pthread_t thread;
 
 } MIRB_DATA;
 
