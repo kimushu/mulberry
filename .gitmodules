@@ -7,3 +7,6 @@
 [submodule "jerryscript"]
 	path = jerryscript
 	url = https://github.com/kimushu/jerryscript.git
+[submodule "duktape"]
+	path = duktape
+	url = https://github.com/svaarala/duktape.git
