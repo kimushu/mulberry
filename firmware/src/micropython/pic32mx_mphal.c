@@ -26,8 +26,9 @@
 
 #include <string.h>
 #include <time.h>
-#include "system_definitions.h"
+#include <stdio.h>
 #include "py/mphal.h"
+#include "sys_console_stdio.h"
 
 static int interrupt_char;
 
@@ -61,14 +62,7 @@ void mp_hal_set_interrupt_char(int c)
 
 int mp_hal_stdin_rx_chr(void)
 {
-    unsigned char buf;
-    for (;;) {
-        int result = SYS_CONSOLE_Read(SYS_CONSOLE_INDEX_0, STDIN_FILENO, &buf, 1);
-        if (result == 1) {
-            return buf;
-        }
-        usleep(1000);
-    }
+    return getchar();
 }
 
 void mp_hal_stdout_tx_str(const char *str)
@@ -78,34 +72,12 @@ void mp_hal_stdout_tx_str(const char *str)
 
 void mp_hal_stdout_tx_strn(const char *str, size_t len)
 {
-    uint32_t odd_size = (4 - (((uint32_t)str) & 3)) & 3;
-    if (odd_size > len) {
-        odd_size = len;
-    }
-    if (odd_size > 0) {
-        uint32_t odd_buf;
-        memcpy(&odd_buf, str, odd_size);
-        mp_hal_stdout_tx_strn((char *)&odd_buf, odd_size);
-        str += odd_size;
-        len -= odd_size;
-    }
-    if (len > 0) {
-        SYS_DEVCON_DataCacheClean((uint32_t)str, len);
-        SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, str, len);
-    }
+    stdout_convert_crlf = 0;
+    fwrite(str, 1, len, stdout);
 }
 
 void mp_hal_stdout_tx_strn_cooked(const char *str, size_t len)
 {
-    const char *lf;
-retry:
-    lf = memchr(str, '\n', len);
-    if (lf) {
-        mp_hal_stdout_tx_strn(str, lf - str);
-        mp_hal_stdout_tx_strn("\r\n", 2);
-        len -= (lf - str + 1);
-        str = lf + 1;
-        goto retry;
-    }
-    return mp_hal_stdout_tx_strn(str, len);
+    stdout_convert_crlf = 1;
+    fwrite(str, 1, len, stdout);
 }
