@@ -60,7 +60,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "system/common/sys_common.h"
-#include "mirb.h"
+#include "run_mrb.h"
 #include "system_definitions.h"
 
 // *****************************************************************************

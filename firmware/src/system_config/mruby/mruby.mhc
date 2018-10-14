@@ -13,7 +13,7 @@ CONFIG_APP_INSTANCES=1
 # from $HARMONY_VERSION_PATH\utilities\mhc\config\app_name_idx_gencode.ftl
 #
 CONFIG_APP_MENU_IDX0=y
-CONFIG_APP_NAME_0="mirb"
+CONFIG_APP_NAME_0="run_mrb"
 CONFIG_APP_AUTO_GENERATE_CODE0=n
 #
 # from $HARMONY_VERSION_PATH\apps\myapps\mulberry\firmware\mulberry.hconfig

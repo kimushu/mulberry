@@ -88,7 +88,7 @@ void SYS_Tasks ( void )
     USB_DEVICE_Tasks(sysObj.usbDevObject0);
 
     /* Maintain the application's state machine. */
-    MIRB_Tasks();
+    RUN_MRB_Tasks();
 }
 
 

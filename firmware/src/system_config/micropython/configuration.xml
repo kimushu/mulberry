@@ -332,41 +332,41 @@
       <Template dnOrder="3">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/micropython</Path>
-        <Checksum dnOrder="2">12CB5B606C0982B7EA9455F7857637CB</Checksum>
+        <Checksum dnOrder="2">6DA1CF6E1D67295C11A7754984063D3D</Checksum>
       </Template>
       <Template dnOrder="4">
-        <Name dnOrder="0">pyexec.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
-      </Template>
-      <Template dnOrder="5">
         <Name dnOrder="0">sys_clk_pic32mz.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/micropython/framework/system/clk/src</Path>
         <Checksum dnOrder="2">CC45A61DC821F2A45FBFD5EB0F76DD59</Checksum>
       </Template>
-      <Template dnOrder="6">
+      <Template dnOrder="5">
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/micropython</Path>
-        <Checksum dnOrder="2">CFB7970469CD82887E8260BE74D133D9</Checksum>
+        <Checksum dnOrder="2">1DDAD8902B488756FEC0112573123AD1</Checksum>
       </Template>
-      <Template dnOrder="7">
+      <Template dnOrder="6">
         <Name dnOrder="0">sys_devcon_cache_pic32mz.S</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/micropython/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">D0A9CCA1CA85BB1CE7364A5DE10CC07D</Checksum>
       </Template>
-      <Template dnOrder="8">
+      <Template dnOrder="7">
         <Name dnOrder="0">sys_devcon_cache.h</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/micropython/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">5EB0485AC07A8B25665195B960AFBE5B</Checksum>
       </Template>
-      <Template dnOrder="9">
+      <Template dnOrder="8">
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/micropython</Path>
-        <Checksum dnOrder="2">9DA383F6952D8955F88B52E0816EFD39</Checksum>
+        <Checksum dnOrder="2">76C157A2F11C68E45048287F147747CD</Checksum>
       </Template>
-      <Template dnOrder="10">
+      <Template dnOrder="9">
         <Name dnOrder="0">system_definitions.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/micropython</Path>
-        <Checksum dnOrder="2">35AC062256BDE5400F9783AA9C5143F3</Checksum>
+        <Checksum dnOrder="2">E473710DC62416366F276F86AF746ECE</Checksum>
+      </Template>
+      <Template dnOrder="10">
+        <Name dnOrder="0">run_mp.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
       </Template>
       <Template dnOrder="11">
         <Name dnOrder="0">sys_devcon.c</Name>
@@ -384,18 +384,18 @@
         <Checksum dnOrder="2">20E9EB173DF33BE1A42FC8EC1E25E0EE</Checksum>
       </Template>
       <Template dnOrder="14">
+        <Name dnOrder="0">run_mp.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="15">
         <Name dnOrder="0">sys_devcon_local.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/micropython/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">B66F9B4DBD85DA7F9DE775E864E01395</Checksum>
       </Template>
-      <Template dnOrder="15">
+      <Template dnOrder="16">
         <Name dnOrder="0">sys_ports_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/micropython/framework/system/ports/src</Path>
         <Checksum dnOrder="2">E2561D1C24238DE26AA46252CC4BFE99</Checksum>
-      </Template>
-      <Template dnOrder="16">
-        <Name dnOrder="0">pyexec.h</Name>
-        <Path dnOrder="1">Header&amp;#160;Files/app</Path>
       </Template>
       <Template dnOrder="17">
         <Name dnOrder="0">sys_devcon.h</Name>

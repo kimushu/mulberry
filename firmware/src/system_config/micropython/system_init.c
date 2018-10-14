@@ -665,7 +665,7 @@ void SYS_Initialize ( void* data )
     SYS_INT_Enable();
 
     /* Initialize the Application */
-    PYEXEC_Initialize();
+    RUN_MP_Initialize();
 }
 
 

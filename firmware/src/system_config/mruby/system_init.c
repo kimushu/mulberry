@@ -665,7 +665,7 @@ void SYS_Initialize ( void* data )
     SYS_INT_Enable();
 
     /* Initialize the Application */
-    MIRB_Initialize();
+    RUN_MRB_Initialize();
 }
 
 
