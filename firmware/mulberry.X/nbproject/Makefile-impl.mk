@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=mulberry.X
 
 # Active Configuration
-DEFAULTCONF=mruby
+DEFAULTCONF=micropython
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=mruby 
+ALLCONFS=mruby micropython 
 
 
 # build
@@ -46,12 +46,14 @@ ALLCONFS=mruby
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=mruby clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=micropython clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=mruby build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=micropython build
 
 
 

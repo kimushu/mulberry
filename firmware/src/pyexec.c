@@ -5,7 +5,7 @@
     Microchip Technology Inc.
   
   File Name:
-    mirb.c
+    pyexec.c
 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
@@ -53,16 +53,23 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
-#include "mirb.h"
-#include "pybrepl.h"
-#include <mruby.h>
-#include <stdio.h>
+#include "pyexec.h"
+#include <pthread.h>
+#include "py/compile.h"
+#include "py/runtime.h"
+#include "py/gc.h"
+#include "py/mphal.h"
+#include "py/mperrno.h"
+#include "lib/utils/pyexec.h"
+#include "lib/mp-readline/readline.h"
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
 // *****************************************************************************
 // *****************************************************************************
+
+#define HEAP_SIZE       (400 * 1024)
 
 // *****************************************************************************
 /* Application Data
@@ -79,7 +86,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     Application strings and buffers are be defined outside this structure.
 */
 
-MIRB_DATA mirbData;
+PYEXEC_DATA pyexecData;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -96,17 +103,64 @@ MIRB_DATA mirbData;
 // *****************************************************************************
 // *****************************************************************************
 
-extern int mirb_main(FILE *fp, int verbose, int mrb_argc, char **argv);
 
-
-static void *MIRB_Thread(MIRB_DATA *data)
+void *PYEXEC_Thread(PYEXEC_DATA *data)
 {
-    SYS_CONSOLE_Override();
-
-    for (;;) {
-        pybreplInit("\r\nmruby " MRUBY_VERSION " - " MRUBY_RELEASE_DATE "\r\nType \"help\" for more information.\r\n");
-        mirb_main(NULL, 0, 0, NULL);
+    int stack_dummy;
+    char *heap = (char *)malloc(HEAP_SIZE);
+    if (!heap) {
+        mp_hal_stdout_tx_str("no sufficient heap area");
+        return NULL;
     }
+
+soft_reset:
+    MP_STATE_THREAD(stack_top) = (char*)&stack_dummy;
+    gc_init(heap, heap + HEAP_SIZE);
+    mp_init();
+    mp_hal_init();
+    readline_init0();
+
+    // REPL loop
+    for (;;) {
+        if (pyexec_mode_kind == PYEXEC_MODE_RAW_REPL) {
+            if (pyexec_raw_repl() != 0) {
+                break;
+            }
+        } else {
+            if (pyexec_friendly_repl() != 0) {
+                break;
+            }
+        }
+    }
+
+    mp_hal_stdout_tx_str("soft reboot\r\n");
+    mp_deinit();
+    goto soft_reset;
+}
+
+
+void gc_collect(void) {
+    void *dummy;
+    gc_collect_start();
+    gc_collect_root(&dummy, ((mp_uint_t)&dummy - (mp_uint_t)MP_STATE_THREAD(stack_top)) / sizeof(mp_uint_t));
+    gc_collect_end();
+}
+
+mp_lexer_t *mp_lexer_new_from_file(const char *filename) {
+    mp_raise_OSError(MP_ENOENT);
+}
+
+mp_import_stat_t mp_import_stat(const char *path) {
+    return MP_IMPORT_STAT_NO_EXIST;
+}
+
+mp_obj_t mp_builtin_open(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs) {
+    return mp_const_none;
+}
+MP_DEFINE_CONST_FUN_OBJ_KW(mp_builtin_open_obj, 1, mp_builtin_open);
+
+void nlr_jump_fail(void *val) {
+    while (1);
 }
 
 
@@ -118,35 +172,35 @@ static void *MIRB_Thread(MIRB_DATA *data)
 
 /*******************************************************************************
   Function:
-    void MIRB_Initialize ( void )
+    void PYEXEC_Initialize ( void )
 
   Remarks:
-    See prototype in mirb.h.
+    See prototype in pyexec.h.
  */
 
-void MIRB_Initialize ( void )
+void PYEXEC_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
-    mirbData.state = MIRB_STATE_INIT;
+    pyexecData.state = PYEXEC_STATE_INIT;
 }
 
 
 /******************************************************************************
   Function:
-    void MIRB_Tasks ( void )
+    void PYEXEC_Tasks ( void )
 
   Remarks:
-    See prototype in mirb.h.
+    See prototype in pyexec.h.
  */
 
-void MIRB_Tasks ( void )
+void PYEXEC_Tasks ( void )
 {
 
     /* Check the application's current state. */
-    switch ( mirbData.state )
+    switch ( pyexecData.state )
     {
         /* Application's initial state. */
-        case MIRB_STATE_INIT:
+        case PYEXEC_STATE_INIT:
         {
             bool appInitialized = true;
             pthread_attr_t attr;
@@ -154,21 +208,20 @@ void MIRB_Tasks ( void )
             pthread_attr_init(&attr);
             pthread_attr_setstacksize(&attr, 16 * 1024);
 
-            if (pthread_create(&mirbData.thread, &attr, (void *(*)(void *))MIRB_Thread, &mirbData) != 0)
+            if (pthread_create(&pyexecData.thread, &attr, (void *(*)(void *))PYEXEC_Thread, &pyexecData) != 0)
             {
                 appInitialized = false;
             }
 
             if (appInitialized)
             {
-                mirbData.state = MIRB_STATE_SERVICE_TASKS;
+                pyexecData.state = PYEXEC_STATE_SERVICE_TASKS;
             }
             break;
         }
 
-        case MIRB_STATE_SERVICE_TASKS:
+        case PYEXEC_STATE_SERVICE_TASKS:
         {
-        
             break;
         }
 
@@ -181,6 +234,7 @@ void MIRB_Tasks ( void )
     }
 }
 
+ 
 
 /*******************************************************************************
  End of File
