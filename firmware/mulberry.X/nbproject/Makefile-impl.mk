@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=mulberry.X
 
 # Active Configuration
-DEFAULTCONF=duktape
+DEFAULTCONF=jerryscript
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=mruby micropython duktape 
+ALLCONFS=mruby micropython duktape jerryscript 
 
 
 # build
@@ -48,6 +48,7 @@ ALLCONFS=mruby micropython duktape
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=mruby clean
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=micropython clean
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=duktape clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=jerryscript clean
 
 
 
@@ -56,6 +57,7 @@ ALLCONFS=mruby micropython duktape
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=mruby build
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=micropython build
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=duktape build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=jerryscript build
 
 
 

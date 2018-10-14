@@ -25,3 +25,10 @@ CND_ARTIFACT_PATH_duktape=dist/duktape/production/mulberry.X.production.hex
 CND_PACKAGE_DIR_duktape=${CND_DISTDIR}/duktape/package
 CND_PACKAGE_NAME_duktape=mulberry.x.tar
 CND_PACKAGE_PATH_duktape=${CND_DISTDIR}/duktape/package/mulberry.x.tar
+# jerryscript configuration
+CND_ARTIFACT_DIR_jerryscript=dist/jerryscript/production
+CND_ARTIFACT_NAME_jerryscript=mulberry.X.production.hex
+CND_ARTIFACT_PATH_jerryscript=dist/jerryscript/production/mulberry.X.production.hex
+CND_PACKAGE_DIR_jerryscript=${CND_DISTDIR}/jerryscript/package
+CND_PACKAGE_NAME_jerryscript=mulberry.x.tar
+CND_PACKAGE_PATH_jerryscript=${CND_DISTDIR}/jerryscript/package/mulberry.x.tar
