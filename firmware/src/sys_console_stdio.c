@@ -5,11 +5,22 @@
 
 int stdout_convert_crlf;
 
+static sem_t sem_read;
 static sem_t sem_write;
+static char read_buffer[SYS_CONSOLE_USB_CDC_READ_BUFFER_SIZE] SYS_CONSOLE_BUFFER_DMA_READY;
+static int read_pos;
+static int read_len;
 
-static ssize_t raw_read(void *buf, size_t size)
+static ssize_t raw_read(void)
 {
-    return SYS_CONSOLE_Read(SYS_CONSOLE_INDEX_0, STDIN_FILENO, buf, size);
+    return SYS_CONSOLE_Read(SYS_CONSOLE_INDEX_0, STDIN_FILENO, read_buffer, sizeof(read_buffer));
+}
+
+static void read_callback(void *buf)
+{
+    read_pos = 0;
+    read_len = *((int *)buf);
+    sem_post(&sem_read);
 }
 
 static ssize_t stdin_read(void *cookie, char *buf, size_t size)
@@ -17,20 +28,27 @@ static ssize_t stdin_read(void *cookie, char *buf, size_t size)
     ssize_t bytesRead = 0;
 
     while (size > 0) {
-        int result = raw_read(buf, size);
-        if (result < 0) {
-            return -1;
+        int chunk_len = read_len - read_pos;
+        if (chunk_len > size) {
+            chunk_len = size;
         }
-        if (result == 0) {
+        if (chunk_len > 0) {
+            memcpy(buf, read_buffer + read_pos, chunk_len);
+            read_pos += chunk_len;
+            buf += chunk_len;
+            size -= chunk_len;
+            bytesRead += chunk_len;
+            continue;
+        }
+retry_read:
+        if (raw_read() == 0) {
             if (bytesRead == 0) {
                 usleep(10000);
-                continue;
+                goto retry_read;
             }
             break;
         }
-        bytesRead += result;
-        size -= result;
-        buf += result;
+        sem_wait(&sem_read);
     }
 
     return bytesRead;
@@ -90,6 +108,10 @@ static const cookie_io_functions_t stdout_cookie = {
 void SYS_CONSOLE_STDIO_Initialize(void)
 {
     stdout_convert_crlf = 0;
+    read_pos = 0;
+    read_len = 0;
+    sem_init(&sem_read, 0, 0);
+    SYS_CONSOLE_RegisterCallback(SYS_CONSOLE_INDEX_0, read_callback, SYS_CONSOLE_EVENT_READ_COMPLETE);
     sem_init(&sem_write, 0, 0);
     SYS_CONSOLE_RegisterCallback(SYS_CONSOLE_INDEX_0, write_callback, SYS_CONSOLE_EVENT_WRITE_COMPLETE);
 
