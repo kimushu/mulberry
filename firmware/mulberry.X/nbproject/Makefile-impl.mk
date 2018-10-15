@@ -27,7 +27,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=mulberry.X
 
 # Active Configuration
-DEFAULTCONF=jerryscript
+DEFAULTCONF=micropython
 CONF=${DEFAULTCONF}
 
 # All Configurations

@@ -340,17 +340,15 @@ static int pybreplPaste(void)
                 free(state.buf);
                 state.buf = NULL;
                 state.max_len = 0;
-                pybreplSetMode(PYBREPL_MODE_NORMAL);
-                return PYBREPL_RET_RESTART;
+                goto to_normal;
             }
             if (!pybreplGrowthBuffer()) {
                 return PYBREPL_RET_FAILURE;
             }
             if (ch == 0x04) {
                 // Ctrl-D
-                pybreplSetMode(PYBREPL_MODE_NORMAL);
                 state.buf[state.pos] = '\0';
-                return PYBREPL_RET_BUFFER;
+                goto to_normal;
             }
             state.buf[state.pos++] = (char)ch;
             ++state.len;
@@ -361,6 +359,11 @@ static int pybreplPaste(void)
             }
         }
     }
+    
+to_normal:
+    putchar('\n');
+    pybreplSetMode(PYBREPL_MODE_NORMAL);
+    return PYBREPL_RET_BUFFER;
 }
 
 char *pybreplReadLine(const char *prompt)
