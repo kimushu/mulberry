@@ -50,9 +50,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/common/sys_common.h"
 #include "system/common/sys_module.h"
 #include "system/devcon/sys_devcon.h"
+#include "unixfd.h"
+#include <fcntl.h>
+#include <unistd.h>
 #include "system/clk/sys_clk.h"
 #include "system/int/sys_int.h"
-#include "system/console/sys_console.h"
 #include "system/tmr/sys_tmr.h"
 #include "driver/tmr/drv_tmr.h"
 #include "system/ports/sys_ports.h"
@@ -96,7 +98,6 @@ typedef struct
     SYS_MODULE_OBJ  sysTmr;
     SYS_MODULE_OBJ  drvTmr0;
 
-    SYS_MODULE_OBJ  sysConsole0;
     SYS_MODULE_OBJ  drvUSBObject;
     
     SYS_MODULE_OBJ  usbDevObject0;

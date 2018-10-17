@@ -47,6 +47,7 @@
               <itemPath>../src/system_config/micropython/osal/osal.h</itemPath>
             </logicalFolder>
             <itemPath>../src/system_config/micropython/tth_config.h</itemPath>
+            <itemPath>../src/system_config/micropython/unixfd_config.h</itemPath>
             <itemPath>../src/system_config/micropython/system_config.h</itemPath>
             <itemPath>../src/system_config/micropython/system_definitions.h</itemPath>
           </logicalFolder>
@@ -162,6 +163,14 @@
           <itemPath>../../../../../framework/usb/usb_billboard.h</itemPath>
           <itemPath>../../../../../framework/usb/usb_cdc.h</itemPath>
           <itemPath>../../../../../framework/usb/usb_device_cdc.h</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="f4" displayName="third_party" projectFiles="true">
+        <logicalFolder name="f1" displayName="unixfd" projectFiles="true">
+          <logicalFolder name="f1" displayName="sys" projectFiles="true">
+            <itemPath>../../../../../third_party/harmony-unixfd/src/sys/termios.h</itemPath>
+          </logicalFolder>
+          <itemPath>../../../../../third_party/harmony-unixfd/src/unixfd.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f2" displayName="TINYTH" projectFiles="true">
@@ -283,7 +292,6 @@
         </logicalFolder>
         <itemPath>../src/main.c</itemPath>
         <itemPath>../src/pybrepl.c</itemPath>
-        <itemPath>../src/sys_console_stdio.c</itemPath>
         <itemPath>../src/run_duk.c</itemPath>
         <itemPath>../src/run_mp.c</itemPath>
         <itemPath>../src/run_mrb.c</itemPath>
@@ -334,6 +342,12 @@
               <itemPath>../../../../../framework/usb/src/dynamic/usb_device_cdc_acm.c</itemPath>
             </logicalFolder>
           </logicalFolder>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="f4" displayName="third_party" projectFiles="true">
+        <logicalFolder name="f1" displayName="unixfd" projectFiles="true">
+          <itemPath>../../../../../third_party/harmony-unixfd/src/unixfd_core.c</itemPath>
+          <itemPath>../../../../../third_party/harmony-unixfd/src/unixfd_usbcdc.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f2" displayName="TINYTH" projectFiles="true">
@@ -410,6 +424,22 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../../../../../third_party/harmony-unixfd/src/sys/termios.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd_core.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd_usbcdc.c"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../src/duktape/duk_config.h" ex="true" overriding="false">
         <C32>
         </C32>
@@ -842,6 +872,10 @@
             ex="true"
             overriding="false">
       </item>
+      <item path="../src/system_config/micropython/unixfd_config.h"
+            ex="true"
+            overriding="false">
+      </item>
       <C32>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
@@ -1224,6 +1258,26 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../../../../../framework/system/console/src/sys_console.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../framework/system/console/src/sys_console_local.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../framework/system/console/src/sys_console_usb_cdc.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../framework/system/console/src/sys_console_usb_cdc_local.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../framework/system/console/sys_console.h"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../src/duktape/duk_config.h" ex="true" overriding="false">
         <C32>
         </C32>
@@ -1351,20 +1405,6 @@
         </C32Global>
       </item>
       <item path="../src/run_mrb.h" ex="true" overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
-      </item>
-      <item path="../src/sys_console_stdio.c" ex="false" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -1899,7 +1939,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/system_config/micropython;../src/micropython;../../../../../framework;../src/system_config/micropython/framework;../../../../../third_party/tinythreads/TINYTH/inc"/>
+                  value="../src;../src/system_config/micropython;../src/micropython;../../../../../framework;../src/system_config/micropython/framework;../../../../../third_party/tinythreads/TINYTH/inc;../../../../../third_party/harmony-unixfd/src"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -2170,6 +2210,22 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../../../../../third_party/harmony-unixfd/src/sys/termios.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd_core.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd_usbcdc.c"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../src/micropython/pic32mx_mphal.c" ex="true" overriding="false">
         <C32>
         </C32>
@@ -2282,20 +2338,6 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="../src/sys_console_stdio.c" ex="false" overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
-      </item>
       <item path="../src/system_config/micropython/framework/system/clk/src/sys_clk_pic32mz.c"
             ex="true"
             overriding="false">
@@ -2357,6 +2399,10 @@
             overriding="false">
       </item>
       <item path="../src/system_config/micropython/tth_config.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../src/system_config/micropython/unixfd_config.h"
             ex="true"
             overriding="false">
       </item>
@@ -2896,6 +2942,22 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../../../../../third_party/harmony-unixfd/src/sys/termios.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd_core.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd_usbcdc.c"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../src/duktape/duk_config.h" ex="true" overriding="false">
         <C32>
         </C32>
@@ -3078,20 +3140,6 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="../src/sys_console_stdio.c" ex="false" overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
-      </item>
       <item path="../src/system_config/micropython/framework/system/clk/src/sys_clk_pic32mz.c"
             ex="true"
             overriding="false">
@@ -3153,6 +3201,10 @@
             overriding="false">
       </item>
       <item path="../src/system_config/micropython/tth_config.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../src/system_config/micropython/unixfd_config.h"
             ex="true"
             overriding="false">
       </item>

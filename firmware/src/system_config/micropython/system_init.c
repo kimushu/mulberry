@@ -179,20 +179,6 @@ SYSTEM_OBJECTS sysObj;
 // Section: Module Initialization Data
 // *****************************************************************************
 // *****************************************************************************
-// <editor-fold defaultstate="collapsed" desc="SYS_CONSOLE Initialization Data">
-/*** System Console Initialization Data ***/
-
-SYS_MODULE_OBJ sysConsoleObjects[] = { SYS_MODULE_OBJ_INVALID };
-
-/* Declared in console device implementation (sys_console_usb_cdc.c) */
-extern SYS_CONSOLE_DEV_DESC consUsbCdcDevDesc;
-
-SYS_CONSOLE_INIT consUsbInit0 =
-{
-    .moduleInit = {0},
-    .consDevDesc = &consUsbCdcDevDesc,
-};
-// </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="SYS_TMR Initialization Data">
 /*** TMR Service Initialization Data ***/
 const SYS_TMR_INIT sysTmrInitData =
@@ -648,14 +634,18 @@ void SYS_Initialize ( void* data )
 
     /* Initialize System Services */
     SYS_PORTS_Initialize();
-    sysObj.sysConsole0 = SYS_CONSOLE_Initialize(SYS_CONSOLE_INDEX_0, (SYS_MODULE_INIT *)&consUsbInit0);
-
 
     /*** Interrupt Service Initialization Code ***/
     SYS_INT_Initialize();
 
     /*** TMR Service Initialization Code ***/
     sysObj.sysTmr  = SYS_TMR_Initialize(SYS_TMR_INDEX_0, (const SYS_MODULE_INIT  * const)&sysTmrInitData);
+
+    /*** UnixFD Standard I/O Initialization Code ***/
+    unixfd_init_usbcdc();
+    unixfd_stdio_redirect(open(UNIXFD_STDIN_DEVICE, O_RDONLY), STDIN_FILENO);
+    unixfd_stdio_redirect(open(UNIXFD_STDOUT_DEVICE, O_WRONLY), STDOUT_FILENO);
+    unixfd_stdio_redirect(open(UNIXFD_STDERR_DEVICE, O_WRONLY), STDERR_FILENO);
 
     /* Initialize Middleware */
     /* Initialize the USB device layer */

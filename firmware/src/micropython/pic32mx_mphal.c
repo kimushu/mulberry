@@ -28,7 +28,6 @@
 #include <time.h>
 #include <stdio.h>
 #include "py/mphal.h"
-#include "sys_console_stdio.h"
 
 static int interrupt_char;
 
@@ -72,12 +71,22 @@ void mp_hal_stdout_tx_str(const char *str)
 
 void mp_hal_stdout_tx_strn(const char *str, size_t len)
 {
-    stdout_convert_crlf = 0;
     fwrite(str, 1, len, stdout);
+    fflush(stdout);
 }
 
 void mp_hal_stdout_tx_strn_cooked(const char *str, size_t len)
 {
-    stdout_convert_crlf = 1;
+    const char *lf;
+retry:
+    lf = memchr((char *)str, '\n', len);
+    if (lf) {
+        fwrite(str, 1, lf - str, stdout);
+        fwrite("\r\n", 1, 2, stdout);
+        len -= (lf - str + 1);
+        str = lf + 1;
+        goto retry;
+    }
     fwrite(str, 1, len, stdout);
+    fflush(stdout);
 }

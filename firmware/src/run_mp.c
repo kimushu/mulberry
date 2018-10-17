@@ -55,7 +55,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "run_mp.h"
 #include <pthread.h>
-#include "sys_console_stdio.h"
+#include <sys/ioctl.h>
+#include <termios.h>
 #include "py/compile.h"
 #include "py/runtime.h"
 #include "py/gc.h"
@@ -108,15 +109,21 @@ RUN_MP_DATA run_mpData;
 
 void *RUN_MP_WorkerThread(RUN_MP_DATA *data)
 {
-    SYS_CONSOLE_STDIO_Initialize();
-
     char *heap = (char *)malloc(HEAP_SIZE);
     if (!heap) {
         mp_hal_stdout_tx_str("no sufficient heap area");
         return NULL;
     }
 
-soft_reset:;
+soft_reset:
+    for (;;) {
+        // Wait for terminal ready
+        int value;
+        if ((ioctl(STDOUT_FILENO, TIOCMGET, (char *)&value) == 0) && (value & TIOCM_DTR)) {
+            break;
+        }
+        usleep(100000);
+    }
     int stack_dummy;
     MP_STATE_THREAD(stack_top) = (char*)&stack_dummy;
     gc_init(heap, heap + HEAP_SIZE);
