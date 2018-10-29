@@ -28,6 +28,8 @@
 #include <time.h>
 #include <stdio.h>
 #include "py/mphal.h"
+#include <xc.h>
+#include <cp0defs.h>
 
 static int interrupt_char;
 
@@ -36,9 +38,9 @@ void mp_hal_init(void)
     MP_STATE_PORT(keyboard_interrupt_obj) = mp_obj_new_exception(&mp_type_KeyboardInterrupt);
 }
 
-mp_uint_t mp_hal_ticks_us(void)
+mp_uint_t mp_hal_ticks_cpu(void)
 {
-    return 0;
+    return _CP0_GET_COUNT();
 }
 
 mp_uint_t mp_hal_ticks_us(void)
