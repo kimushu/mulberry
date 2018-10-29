@@ -193,6 +193,18 @@ SYS_CONSOLE_INIT consUsbInit0 =
     .consDevDesc = &consUsbCdcDevDesc,
 };
 // </editor-fold>
+// <editor-fold defaultstate="collapsed" desc="SYS_FS Initialization Data">
+/*** File System Initialization Data ***/
+
+const SYS_FS_MEDIA_MOUNT_DATA sysfsMountTable[SYS_FS_VOLUME_NUMBER] = 
+{
+	{NULL}
+};
+
+
+
+
+// </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="SYS_TMR Initialization Data">
 /*** TMR Service Initialization Data ***/
 const SYS_TMR_INIT sysTmrInitData =
@@ -651,11 +663,20 @@ void SYS_Initialize ( void* data )
     sysObj.sysConsole0 = SYS_CONSOLE_Initialize(SYS_CONSOLE_INDEX_0, (SYS_MODULE_INIT *)&consUsbInit0);
 
 
+    /*** File System Service Initialization Code ***/
+    SYS_FS_Initialize( (const void *) sysFSInit );
+
     /*** Interrupt Service Initialization Code ***/
     SYS_INT_Initialize();
 
     /*** TMR Service Initialization Code ***/
     sysObj.sysTmr  = SYS_TMR_Initialize(SYS_TMR_INDEX_0, (const SYS_MODULE_INIT  * const)&sysTmrInitData);
+
+    /*** UnixFD Standard I/O Initialization Code ***/
+    unixfd_init_usbcdc();
+    unixfd_stdio_redirect(open(UNIXFD_STDIN_DEVICE, O_RDONLY), STDIN_FILENO);
+    unixfd_stdio_redirect(open(UNIXFD_STDOUT_DEVICE, O_WRONLY), STDOUT_FILENO);
+    unixfd_stdio_redirect(open(UNIXFD_STDERR_DEVICE, O_WRONLY), STDERR_FILENO);
 
     /* Initialize Middleware */
     /* Initialize the USB device layer */

@@ -73,8 +73,11 @@ void SYS_Tasks ( void )
 {
     /* Maintain system services */
     SYS_CONSOLE_Tasks(sysObj.sysConsole0);
+    /* Maintain the file system state machine. */
+    SYS_FS_Tasks();
     /* SYS_TMR Device layer tasks routine */ 
     SYS_TMR_Tasks(sysObj.sysTmr);
+    unixfd_task_usbcdc();
 
     /* Maintain Device Drivers */
 

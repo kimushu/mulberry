@@ -3,21 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/system_config/mruby/system_exceptions.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/mruby/mirb.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/pybrepl.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/mulberry.X/nbproject/Makefile-mruby.mk</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/system_config/micropython/system_init.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/sys_console_stdio.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/mulberry.X/dist/mruby/production/mulberry.X.production.lst</file>
-            <file>file:/C:/microchip/harmony/v2_06/framework/system/console/sys_console.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/third_party/tinythreads/TINYTH/inc/priv/tth_arch_pic32m.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/system_config/micropython/system_definitions.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/system_config/mruby/system_definitions.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/framework/system/console/src/sys_console_usb_cdc.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/third_party/harmony-unixfd/src/unixfd_core.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/system_config/mruby/system_init.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/third_party/harmony-unixfd/src/unixfd_null.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/micropython/py/mpstate.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/run_mp.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/micropython/modutime.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/main.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/system_config/mruby/system_config.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/system_config/mruby/framework/system/devcon/src/sys_devcon_pic32mz.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/micropython/py/modio.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/myapps/mulberry/firmware/src/run_mp.h</file>
         </group>
     </open-files>
 </project-private>

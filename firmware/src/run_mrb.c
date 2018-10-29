@@ -58,7 +58,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <mruby.h>
 #include <time.h>
 #include <sys/time.h>
-#include "sys_console_stdio.h"
 
 #define STACK_SIZE      (8 * 1024)
 
@@ -103,9 +102,6 @@ RUN_MRB_DATA run_mrbData;
 
 void *RUN_MRB_WorkerThread(RUN_MRB_DATA *data)
 {
-    SYS_CONSOLE_STDIO_Initialize();
-    stdout_convert_crlf = 1;
-
     for (;;) {
         pybreplInit("\nmruby " MRUBY_VERSION " - " MRUBY_RELEASE_DATE "\nType \"help\" for more information.\n");
         mirb_main(NULL, 0, 0, NULL);

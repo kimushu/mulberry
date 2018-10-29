@@ -36,13 +36,40 @@ void mp_hal_init(void)
     MP_STATE_PORT(keyboard_interrupt_obj) = mp_obj_new_exception(&mp_type_KeyboardInterrupt);
 }
 
+mp_uint_t mp_hal_ticks_us(void)
+{
+    return 0;
+}
+
+mp_uint_t mp_hal_ticks_us(void)
+{
+    struct timespec tp;
+    if (clock_gettime(CLOCK_MONOTONIC, &tp) != 0) {
+        return 0;
+    }
+    return tp.tv_sec * 1000000 + tp.tv_nsec / 1000;
+}
+
 mp_uint_t mp_hal_ticks_ms(void)
 {
     struct timespec tp;
     if (clock_gettime(CLOCK_MONOTONIC, &tp) != 0) {
         return 0;
     }
-    return tp.tv_sec * 1000 + tp.tv_nsec / 1000;
+    return tp.tv_sec * 1000 + tp.tv_nsec / 1000000;
+}
+
+void mp_hal_delay_us(mp_uint_t us)
+{
+    while (us >= 1000000) {
+        sleep(1);
+        us -= 1000000;
+    }
+    while (us > 1000) {
+        mp_hal_delay_ms(1);
+        us -= 1000;
+    }
+    usleep(us);
 }
 
 void mp_hal_delay_ms(mp_uint_t ms)
