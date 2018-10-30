@@ -50,7 +50,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/common/sys_common.h"
 #include "system/common/sys_module.h"
 #include "system/devcon/sys_devcon.h"
-#include "unixfd.h"
+#include "posixvfs.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include "system/clk/sys_clk.h"

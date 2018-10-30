@@ -159,12 +159,6 @@ typedef long mp_off_t;
 // board specifics
 
 #define MICROPY_MPHALPORT_H         "pic32mx_mphal.h"
-#ifndef MICROPY_PY_SYS_PLATFORM
-# define MICROPY_PY_SYS_PLATFORM    "unknown"
-#endif
-#ifndef MICROPY_HW_BOARD_NAME
-# define MICROPY_HW_BOARD_NAME      "PIC32"
-#endif
-#ifndef MICROPY_HW_MCU_NAME
-# define MICROPY_HW_MCU_NAME        "PIC32"
-#endif
+#define MICROPY_PY_SYS_PLATFORM     "pic32mx"
+#define MICROPY_HW_BOARD_NAME       "Mulberry"
+#define MICROPY_HW_MCU_NAME         "PIC32MZ"

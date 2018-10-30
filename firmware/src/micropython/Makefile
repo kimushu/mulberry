@@ -34,10 +34,6 @@ else
 CFLAGS += -O1 -DNDEBUG
 endif
 
-CFLAGS += -D'MICROPY_PY_SYS_PLATFORM=\"pic32mx\"'
-CFLAGS += -D'MICROPY_HW_BOARD_NAME=\"mulberry\"'
-CFLAGS += -D'MICROPY_HW_MCU_NAME=\"PIC32\"'
-
 $(info $(CFLAGS))
 
 SRC_C = \

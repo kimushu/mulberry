@@ -10,6 +10,10 @@
           <itemPath>../src/duktape/duktape.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f3" displayName="micropython" projectFiles="true">
+          <itemPath>../src/micropython/modpyb.h</itemPath>
+          <itemPath>../src/micropython/mpconfigport.h</itemPath>
+          <itemPath>../src/micropython/pic32mx_mphal.h</itemPath>
+          <itemPath>../src/micropython/qstrdefsport.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="mruby" projectFiles="true">
         </logicalFolder>
@@ -47,7 +51,7 @@
               <itemPath>../src/system_config/micropython/osal/osal.h</itemPath>
             </logicalFolder>
             <itemPath>../src/system_config/micropython/tth_config.h</itemPath>
-            <itemPath>../src/system_config/micropython/unixfd_config.h</itemPath>
+            <itemPath>../src/system_config/micropython/posixvfs_config.h</itemPath>
             <itemPath>../src/system_config/micropython/system_config.h</itemPath>
             <itemPath>../src/system_config/micropython/system_definitions.h</itemPath>
           </logicalFolder>
@@ -196,6 +200,13 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f4" displayName="third_party" projectFiles="true">
+        <logicalFolder name="f2" displayName="posixvfs" projectFiles="true">
+          <logicalFolder name="f1" displayName="sys" projectFiles="true">
+            <itemPath>../../../../../third_party/harmony-posixvfs/src/sys/ioctl.h</itemPath>
+            <itemPath>../../../../../third_party/harmony-posixvfs/src/sys/termios.h</itemPath>
+          </logicalFolder>
+          <itemPath>../../../../../third_party/harmony-posixvfs/src/posixvfs.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="f1" displayName="unixfd" projectFiles="true">
           <logicalFolder name="f1" displayName="sys" projectFiles="true">
             <itemPath>../../../../../third_party/harmony-unixfd/src/sys/termios.h</itemPath>
@@ -388,6 +399,10 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f4" displayName="third_party" projectFiles="true">
+        <logicalFolder name="f2" displayName="posixvfs" projectFiles="true">
+          <itemPath>../../../../../third_party/harmony-posixvfs/src/posixvfs_core.c</itemPath>
+          <itemPath>../../../../../third_party/harmony-posixvfs/src/posixvfs_usbcdc.c</itemPath>
+        </logicalFolder>
         <logicalFolder name="f1" displayName="unixfd" projectFiles="true">
           <itemPath>../../../../../third_party/harmony-unixfd/src/unixfd_core.c</itemPath>
           <itemPath>../../../../../third_party/harmony-unixfd/src/unixfd_usbcdc.c</itemPath>
@@ -467,6 +482,26 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../../../../../third_party/harmony-posixvfs/src/posixvfs.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/posixvfs_core.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/posixvfs_usbcdc.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/sys/ioctl.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/sys/termios.h"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../../../../../third_party/harmony-unixfd/src/sys/termios.h"
             ex="false"
             overriding="false">
@@ -601,6 +636,20 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../src/micropython/modpyb.h" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
       <item path="../src/micropython/moduos.c" ex="true" overriding="false">
         <C32>
         </C32>
@@ -629,7 +678,49 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../src/micropython/mpconfigport.h" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
       <item path="../src/micropython/pic32mx_mphal.c" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="../src/micropython/pic32mx_mphal.h" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="../src/micropython/qstrdefsport.h" ex="true" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -958,274 +1049,70 @@
       <item path="../src/system_config/micropython/framework/system/clk/src/sys_clk_pic32mz.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_cache.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_cache_pic32mz.S"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_local.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_pic32mz.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/sys_devcon.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/ports/src/sys_ports_static.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/osal/osal.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
+      </item>
+      <item path="../src/system_config/micropython/posixvfs_config.h"
+            ex="true"
+            overriding="false">
       </item>
       <item path="../src/system_config/micropython/system_config.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_definitions.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_exceptions.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_init.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_interrupt.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_tasks.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/tth_config.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
-      </item>
-      <item path="../src/system_config/micropython/unixfd_config.h"
-            ex="true"
-            overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <C32>
         <property key="additional-warnings" value="false"/>
@@ -1586,8 +1473,8 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>../../../../../bin/framework/peripheral/PIC32MZ2048EFM064_peripherals.a</linkerLibFileItem>
             <linkerLibFileItem>../src/micropython/build/libmicropython.a</linkerLibFileItem>
+            <linkerLibFileItem>../../../../../bin/framework/peripheral/PIC32MZ2048EFM064_peripherals.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -1880,6 +1767,22 @@
         </C32CPP>
         <C32Global>
         </C32Global>
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/sys/termios.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd_core.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-unixfd/src/unixfd_usbcdc.c"
+            ex="true"
+            overriding="false">
       </item>
       <item path="../src/duktape/duk_config.h" ex="true" overriding="false">
         <C32>
@@ -2590,7 +2493,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/system_config/micropython;../src/micropython;../../../../../framework;../src/system_config/micropython/framework;../../../../../third_party/tinythreads/TINYTH/inc;../../../../../third_party/harmony-unixfd/src"/>
+                  value="../src;../src/system_config/micropython;../src/micropython;../../../../../framework;../src/system_config/micropython/framework;../../../../../third_party/tinythreads/TINYTH/inc;../../../../../third_party/harmony-posixvfs/src"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -3037,6 +2940,26 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/posixvfs.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/posixvfs_core.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/posixvfs_usbcdc.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/sys/ioctl.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/sys/termios.h"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../../../../../third_party/harmony-unixfd/src/sys/ioctl.h"
             ex="true"
             overriding="false">
@@ -3145,6 +3068,20 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../src/micropython/modpyb.h" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
       <item path="../src/micropython/moduos.c" ex="true" overriding="false">
         <C32>
         </C32>
@@ -3173,7 +3110,49 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../src/micropython/mpconfigport.h" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
       <item path="../src/micropython/pic32mx_mphal.c" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="../src/micropython/pic32mx_mphal.h" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="../src/micropython/qstrdefsport.h" ex="true" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -3288,274 +3267,70 @@
       <item path="../src/system_config/micropython/framework/system/clk/src/sys_clk_pic32mz.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_cache.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_cache_pic32mz.S"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_local.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_pic32mz.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/sys_devcon.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/ports/src/sys_ports_static.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/osal/osal.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
+      </item>
+      <item path="../src/system_config/micropython/posixvfs_config.h"
+            ex="true"
+            overriding="false">
       </item>
       <item path="../src/system_config/micropython/system_config.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_definitions.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_exceptions.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_init.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_interrupt.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_tasks.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/tth_config.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
-      </item>
-      <item path="../src/system_config/micropython/unixfd_config.h"
-            ex="true"
-            overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/mruby/framework/system/clk/src/sys_clk_pic32mz.c"
             ex="true"
@@ -4317,6 +4092,26 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/posixvfs.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/posixvfs_core.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/posixvfs_usbcdc.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/sys/ioctl.h"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="../../../../../third_party/harmony-posixvfs/src/sys/termios.h"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="../../../../../third_party/harmony-unixfd/src/sys/ioctl.h"
             ex="true"
             overriding="false">
@@ -4467,6 +4262,20 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../src/micropython/modpyb.h" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
       <item path="../src/micropython/moduos.c" ex="true" overriding="false">
         <C32>
         </C32>
@@ -4495,7 +4304,49 @@
         <C32Global>
         </C32Global>
       </item>
+      <item path="../src/micropython/mpconfigport.h" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
       <item path="../src/micropython/pic32mx_mphal.c" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="../src/micropython/pic32mx_mphal.h" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="../src/micropython/qstrdefsport.h" ex="true" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -4638,274 +4489,70 @@
       <item path="../src/system_config/micropython/framework/system/clk/src/sys_clk_pic32mz.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_cache.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_cache_pic32mz.S"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_local.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/src/sys_devcon_pic32mz.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/devcon/sys_devcon.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/framework/system/ports/src/sys_ports_static.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/osal/osal.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
+      </item>
+      <item path="../src/system_config/micropython/posixvfs_config.h"
+            ex="true"
+            overriding="false">
       </item>
       <item path="../src/system_config/micropython/system_config.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_definitions.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_exceptions.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_init.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_interrupt.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/system_tasks.c"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/micropython/tth_config.h"
             ex="true"
             overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
-      </item>
-      <item path="../src/system_config/micropython/unixfd_config.h"
-            ex="true"
-            overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
       </item>
       <item path="../src/system_config/mruby/framework/system/clk/src/sys_clk_pic32mz.c"
             ex="true"

@@ -641,11 +641,11 @@ void SYS_Initialize ( void* data )
     /*** TMR Service Initialization Code ***/
     sysObj.sysTmr  = SYS_TMR_Initialize(SYS_TMR_INDEX_0, (const SYS_MODULE_INIT  * const)&sysTmrInitData);
 
-    /*** UnixFD Standard I/O Initialization Code ***/
-    unixfd_init_usbcdc();
-    unixfd_stdio_redirect(open(UNIXFD_STDIN_DEVICE, O_RDONLY), STDIN_FILENO);
-    unixfd_stdio_redirect(open(UNIXFD_STDOUT_DEVICE, O_WRONLY), STDOUT_FILENO);
-    unixfd_stdio_redirect(open(UNIXFD_STDERR_DEVICE, O_WRONLY), STDERR_FILENO);
+    /*** PosixVFS Standard I/O Initialization Code ***/
+    posixvfs_init_usbcdc();
+    posixvfs_stdio_redirect(open(POSIXVFS_STDIN_DEVICE, O_RDONLY), STDIN_FILENO);
+    posixvfs_stdio_redirect(open(POSIXVFS_STDOUT_DEVICE, O_WRONLY), STDOUT_FILENO);
+    posixvfs_stdio_redirect(open(POSIXVFS_STDERR_DEVICE, O_WRONLY), STDERR_FILENO);
 
     /* Initialize Middleware */
     /* Initialize the USB device layer */
